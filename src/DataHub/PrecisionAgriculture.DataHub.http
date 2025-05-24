@@ -1,0 +1,6 @@
+@PrecisionAgriculture.DataHub_HostAddress = http://localhost:5231
+
+GET {{PrecisionAgriculture.DataHub_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
