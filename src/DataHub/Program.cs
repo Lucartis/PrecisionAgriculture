@@ -26,6 +26,11 @@ namespace PrecisionAgriculture.DataHub
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            // Añadir el servicio Bluetooth
+            builder.Services.AddHostedService<BluetoothService>();
+            builder.Services.AddSingleton<ISensorDataAnalyzer, SensorDataAnalyzer>();
+            builder.Services.AddSingleton<INotificationService, NotificationService>();
+
 
             // RabbitMQ Service
             builder.Services.AddSingleton<IRabbitMQService>(provider =>

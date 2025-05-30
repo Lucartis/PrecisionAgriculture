@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PrecisionAgriculture.DataHub")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7dcea495de5993e3b93793e60e309142afff714b")]
 [assembly: System.Reflection.AssemblyProductAttribute("PrecisionAgriculture.DataHub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PrecisionAgriculture.DataHub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

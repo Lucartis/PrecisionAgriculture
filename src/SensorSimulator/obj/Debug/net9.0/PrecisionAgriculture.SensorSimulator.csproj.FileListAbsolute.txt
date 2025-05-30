@@ -27,3 +27,8 @@ C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\obj\Debug\
 C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\obj\Debug\net9.0\PrecisionAgriculture.SensorSimulator.pdb
 C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\obj\Debug\net9.0\PrecisionAgriculture.SensorSimulator.genruntimeconfig.cache
 C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\obj\Debug\net9.0\ref\PrecisionAgriculture.SensorSimulator.dll
+C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\bin\Debug\net9.0\InTheHand.Net.Bluetooth.dll
+C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\bin\Debug\net9.0\Linux.Bluetooth.dll
+C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\bin\Debug\net9.0\Tmds.DBus.dll
+C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\SensorSimulator\obj\Debug\net9.0\PrecisionAgriculture.SensorSimulator.sourcelink.json

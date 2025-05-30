@@ -9,6 +9,8 @@ public class SensorDataController : ControllerBase
 {
     private readonly IRabbitMQService _rabbitMQService;
     private readonly ILogger<SensorDataController> _logger;
+    private readonly ISensorDataAnalyzer _sensorDataAnalyzer;
+    private readonly INotificationService _notificationService;
 
     public SensorDataController(IRabbitMQService rabbitMQService, ILogger<SensorDataController> logger)
     {
@@ -36,13 +38,23 @@ public class SensorDataController : ControllerBase
                 sensorData.SensorType, sensorData.SensorId, sensorData.Location
             );
 
-            // Enviar a RabbitMQ
+            // NUEVO: Analizar datos de sensores
+            var analysisResult = await _sensorDataAnalyzer.AnalyzeDataAsync(sensorData);
+        
+            // NUEVO: Si hay anomalías, enviar notificación
+            if (analysisResult.IsAnomaly)
+            {
+                await _notificationService.SendAnomalyAlertAsync(analysisResult);
+            }
+
+            // Enviar a RabbitMQ (datos originales)
             await _rabbitMQService.PublishSensorDataAsync(sensorData);
 
-            return Ok(new { 
-                message = "Sensor data received and queued successfully",
+            return Ok(new {
+                message = "Sensor data received, analyzed and queued successfully",
                 sensorId = sensorData.SensorId,
-                timestamp = DateTime.UtcNow
+                timestamp = DateTime.UtcNow,
+                anomaliesDetected = analysisResult.IsAnomaly
             });
         }
         catch (Exception ex)
