@@ -12,10 +12,16 @@ public class SensorDataController : ControllerBase
     private readonly ISensorDataAnalyzer _sensorDataAnalyzer;
     private readonly INotificationService _notificationService;
 
-    public SensorDataController(IRabbitMQService rabbitMQService, ILogger<SensorDataController> logger)
+    public SensorDataController(
+        IRabbitMQService rabbitMQService, 
+        ILogger<SensorDataController> logger,
+        ISensorDataAnalyzer sensorDataAnalyzer,
+        INotificationService notificationService)
     {
         _rabbitMQService = rabbitMQService;
         _logger = logger;
+        _sensorDataAnalyzer = sensorDataAnalyzer;
+        _notificationService = notificationService;
     }
 
     [HttpPost]
