@@ -11,17 +11,20 @@ public class SensorDataController : ControllerBase
     private readonly ILogger<SensorDataController> _logger;
     private readonly ISensorDataAnalyzer _sensorDataAnalyzer;
     private readonly INotificationService _notificationService;
+    private readonly IDatabaseService _databaseService;
 
     public SensorDataController(
         IRabbitMQService rabbitMQService, 
         ILogger<SensorDataController> logger,
         ISensorDataAnalyzer sensorDataAnalyzer,
-        INotificationService notificationService)
+        INotificationService notificationService,
+        IDatabaseService databaseService)
     {
         _rabbitMQService = rabbitMQService;
         _logger = logger;
         _sensorDataAnalyzer = sensorDataAnalyzer;
         _notificationService = notificationService;
+        _databaseService = databaseService;
     }
 
     [HttpPost]
@@ -44,20 +47,25 @@ public class SensorDataController : ControllerBase
                 sensorData.SensorType, sensorData.SensorId, sensorData.Location
             );
 
-            // NUEVO: Analizar datos de sensores
+            // 1. Analizar datos de sensores (Preprocesamiento)
             var analysisResult = await _sensorDataAnalyzer.AnalyzeDataAsync(sensorData);
-        
-            // NUEVO: Si hay anomalías, enviar notificación
+
+            // 2. Guardar en la base de datos PostgreSQL (después del preprocesamiento)
+            await _databaseService.SaveSensorDataAsync(sensorData, analysisResult);
+            _logger.LogInformation("💾 Datos guardados en PostgreSQL para sensor {SensorId}", sensorData.SensorId);
+
+            // 3. Si hay anomalías, enviar notificación
             if (analysisResult.IsAnomaly)
             {
                 await _notificationService.SendAnomalyAlertAsync(analysisResult);
+                _logger.LogWarning("⚠️ Anomalía detectada en sensor {SensorId}, notificación enviada", sensorData.SensorId);
             }
 
-            // Enviar a RabbitMQ (datos originales)
+            // 4. Enviar a RabbitMQ (datos originales)
             await _rabbitMQService.PublishSensorDataAsync(sensorData);
 
             return Ok(new {
-                message = "Sensor data received, analyzed and queued successfully",
+                message = "Sensor data received, analyzed, saved to database and queued successfully",
                 sensorId = sensorData.SensorId,
                 timestamp = DateTime.UtcNow,
                 anomaliesDetected = analysisResult.IsAnomaly

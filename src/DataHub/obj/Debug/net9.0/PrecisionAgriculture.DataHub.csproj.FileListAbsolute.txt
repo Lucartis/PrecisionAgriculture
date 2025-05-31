@@ -40,3 +40,4 @@ C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\DataHub\bin\Debug\net9.0\L
 C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\DataHub\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\DataHub\bin\Debug\net9.0\Tmds.DBus.dll
 C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\DataHub\obj\Debug\net9.0\PrecisionAgriculture.DataHub.sourcelink.json
+C:\Users\lucas\RiderProjects\PrecisionAgriculture\src\DataHub\bin\Debug\net9.0\Npgsql.dll

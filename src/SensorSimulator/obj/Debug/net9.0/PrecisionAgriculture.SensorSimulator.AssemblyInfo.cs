@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PrecisionAgriculture.SensorSimulator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1dc4601326af707071354a40d76f057138fdbc82")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+939878847e0ae911f3b212366490f2b3f1273a63")]
 [assembly: System.Reflection.AssemblyProductAttribute("PrecisionAgriculture.SensorSimulator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PrecisionAgriculture.SensorSimulator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

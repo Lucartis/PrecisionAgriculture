@@ -17,8 +17,57 @@ services:
     networks:
       - agriculture-network
 
+  postgres:
+    image: postgres:14
+    container_name: agriculture-postgres
+    environment:
+      POSTGRES_USER: agriuser
+      POSTGRES_PASSWORD: agripass
+      POSTGRES_DB: agriculturedb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql  
+    networks:
+      - agriculture-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: agriculture-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - agriculture-network
+    depends_on:
+      - postgres
+  
+  datahub:
+    build:
+      context: ..
+      dockerfile: src/DataHub/Dockerfile
+    container_name: agriculture-datahub
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=agriculturedb;Username=agriuser;Password=agripass
+      - RabbitMQ__HostName=rabbitmq
+    networks:
+      - agriculture-network
+    restart: on-failure
+    depends_on:
+      - postgres
+      - rabbitmq
 volumes:
   rabbitmq_data:
+  postgres_data:
+  pgadmin_data:
 
 networks:
   agriculture-network:
