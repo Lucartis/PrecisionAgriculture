@@ -26,7 +26,18 @@ namespace PrecisionAgriculture.DataHub
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            // Añadir el servicio Bluetooth
+            builder.Services.AddHostedService<BluetoothService>();
+            builder.Services.AddSingleton<ISensorDataAnalyzer, SensorDataAnalyzer>();
+            builder.Services.AddSingleton<INotificationService, NotificationService>();
+            
+            // Configuración de conexión a PostgreSQL
+            builder.Services.AddSingleton<IDatabaseService, PostgresDatabaseService>();
+            // Configuración de cadena de conexión
+            // Configuración de cadena de conexión
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+                                   throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            
             // RabbitMQ Service
             builder.Services.AddSingleton<IRabbitMQService>(provider =>
             {

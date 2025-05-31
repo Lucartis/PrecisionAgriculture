@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="InTheHand.Net.Bluetooth" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.5" />
   </ItemGroup>
 
